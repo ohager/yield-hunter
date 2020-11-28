@@ -1,5 +1,4 @@
 import React from "react";
-
 type SizeType = 'sm' | 'md' | 'lg' | 'xl'
 
 interface Props {
