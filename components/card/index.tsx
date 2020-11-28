@@ -25,7 +25,6 @@ interface Props {
     width?: WidthType,
     image?: string,
     title: string,
-    href: string
 }
 
 export const Card: React.FC<Props> = (props) => {
