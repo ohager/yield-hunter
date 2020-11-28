@@ -3,8 +3,9 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Layout from "../components/layout";
 import Hero from "../components/hero";
+import {Home} from "../features/home";
 
-export default function Home() {
+export default function HomePage() {
     return (
         <Layout>
             <Head>
@@ -12,7 +13,7 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
             <main>
-                <Hero bg='/img/farmland.small.png'/>
+                <Home />
                 <h1 className="title">
                     Read <Link href="/another-page">page</Link>
                 </h1>
