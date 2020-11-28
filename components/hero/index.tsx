@@ -1,4 +1,3 @@
-import styles from './hero.module.css'
 import React from "react";
 
 interface IProps {
@@ -7,17 +6,11 @@ interface IProps {
 
 export default function Hero<IProps>({bg, children}) {
     return (
-        <div className='container'>
+        <div className='p-0 m-0 h-96 bg-cover bg-bottom bg-no-repeat container min-w-full'>
             {children}
             <style jsx>{`
     .container { 
-        height: 24rem;
-        min-width: 100vw;
-        max-width: 100vw;
-        padding: 0;
-        margin: 0;
-        background: url('${bg}') no-repeat bottom;
-        background-size: cover;
+        background-image: url('${bg}');
     }
       `}</style>
         </div>
