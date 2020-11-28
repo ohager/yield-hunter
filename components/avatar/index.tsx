@@ -6,19 +6,22 @@ interface Props {
     size: SizeType
 }
 
-const mapSizeClass = (size: SizeType): string => {
-    const map = {
-        'sm': 8,
-        'md': 12,
-        'lg': 18,
-        'xl': 24
-    }
-    const s = map[size]
-    return `h-${s} w-${s}`
-}
 
 
 export const Avatar : React.FC<Props> = (props) => {
+
+    const mapSizeClass = (size: SizeType): string => {
+        const map = {
+            'sm': 8,
+            'md': 12,
+            'lg': 18,
+            'xl': 24
+        }
+        const s = map[size]
+        return `h-${s} w-${s}`
+    }
+
+
     const {name, size = 'md'} = props
     const sizeClass = mapSizeClass(size)
     return <div className={sizeClass}>
