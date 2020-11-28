@@ -8,36 +8,41 @@ const CardHolder = ({children}) =>
         {children}
     </div>
 
+const defaultProps = {
+    height: '240px',
+    width: '240px'
+}
+
 // TODO: make this dynamic
 const carouselItems = [
     <CardHolder>
-        <Card elevation="2xl"
-              image='img/farmland.small.png'
+        <Card image='img/farmland.small.png'
               title='Card 1'
+              {...defaultProps}
         >
             Body
         </Card>
     </CardHolder>,
     <CardHolder>
-        <Card elevation="2xl"
-              image='img/farmland.small.png'
+        <Card image='img/farmland.small.png'
               title='Card 2'
+              {...defaultProps}
         >
             Body
         </Card>
     </CardHolder>,
     <CardHolder>
-        <Card elevation="2xl"
-              image='img/farmland.small.png'
+        <Card image='img/farmland.small.png'
               title='Card 3'
+              {...defaultProps}
         >
             Body
         </Card>
     </CardHolder>,
     <CardHolder>
-        <Card elevation="2xl"
-              image='img/farmland.small.png'
+        <Card image='img/farmland.small.png'
               title='Card 4'
+              {...defaultProps}
         >
             Body
         </Card>
