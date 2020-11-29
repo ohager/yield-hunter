@@ -1,5 +1,7 @@
 import React from "react";
-import {AvatarBadge} from "./AvatarBagde";
+import {AvatarBadge} from "./AvatarBadge";
+import Popup from "reactjs-popup";
+import 'reactjs-popup/dist/index.css';
 
 type BadgeType = 'patron' | 'lord'
 
@@ -22,8 +24,16 @@ export const Avatar: React.FC<Props> = (props) => {
 
     return <div className='container'>
         {badge && <AvatarBadge src={getBadgeSource(badge)} size={size}/>}
-        <img className='rounded-full flex items-center justify-center'
-             src={`https://robohash.org/set_set5/bgset_bg1/${name}`} alt={`avatar-${name}`}/>
+        <Popup
+            trigger={open => (
+                <img className='rounded-full flex items-center justify-center'
+                     src={`https://robohash.org/set_set5/bgset_bg1/${name}`} alt={`avatar-${name}`}/>
+
+            )}
+            on={['hover']}
+        >
+            <span>{name}</span>
+        </Popup>
         <style jsx>{`
     .container {
         position: relative;

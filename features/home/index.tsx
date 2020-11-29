@@ -3,6 +3,10 @@ import {Hero} from "../../components/hero";
 import {FieldsCarousel} from "./fieldsCarousel";
 import {Avatar} from "../../components/avatar";
 import {InfoBox} from "./infoBox";
+import {FarmCard} from "../../components/farmCard";
+import {FarmDataSimple} from "../../types/FarmDataSimple";
+import {BurstValue} from "@burstjs/util";
+
 
 export const Home = () => {
     return (
@@ -18,6 +22,7 @@ export const Home = () => {
                     </InfoBox>
                 </div>
             </Hero>
+
         </>
     )
 }

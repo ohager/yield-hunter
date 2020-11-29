@@ -19,7 +19,7 @@ export const Card: React.FC<Props> = (props) => {
 
     return (
         <div className='bg-white rounded-sm relative h-full container shadow-lg'>
-            <header className='p-1 h-1/3 w-full bg bg-cover bg-no-repeat bg-top'>
+            <header className='p-1 h-1/2 w-full bg bg-cover bg-no-repeat bg-top'>
                 <h1>{title}</h1>
             </header>
             <div className='p-1'>

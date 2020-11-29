@@ -2,6 +2,9 @@ import React from "react";
 import Carousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
 import {Card} from "../../components/card";
+import {FarmCard} from "../../components/farmCard";
+import {FarmDataSimple} from "../../types/FarmDataSimple";
+import {BurstValue} from "@burstjs/util";
 
 const CardHolder = ({children}) =>
     <div className='h-64 justify-center flex'>
@@ -13,40 +16,32 @@ const defaultProps = {
     width: '240px'
 }
 
+
+const farmData: FarmDataSimple = {
+    currentFarmValue: BurstValue.fromBurst(1200),
+    farmers: [
+        'BURST-RN82-8TLT-3WB4-G4PLJ',
+        'BURST-C2G7-6X2S-FDPF-2TJP2',
+        'BURST-PBD4-SRG4-XZNL-A9KR3'
+    ],
+    patron: 'BURST-D55E-8EVV-8YHH-5XXNL',
+    patronLevel: BurstValue.fromBurst(2500),
+    farmingPower: BurstValue.fromBurst(200),
+    lordInvestments: BurstValue.fromBurst(50000),
+    lords: [
+        'BURST-RN82-8TLT-3WB4-G4PLJ',
+        'BURST-C2G7-6X2S-FDPF-2TJP2',
+        'BURST-PBD4-SRG4-XZNL-A9KR3',
+    ]
+}
+
+
 // TODO: make this dynamic
 const carouselItems = [
-    <CardHolder>
-        <Card image='img/farmland.small.png'
-              title='Card 1'
-              {...defaultProps}
-        >
-            Body
-        </Card>
-    </CardHolder>,
-    <CardHolder>
-        <Card image='img/farmland.small.png'
-              title='Card 2'
-              {...defaultProps}
-        >
-            Body
-        </Card>
-    </CardHolder>,
-    <CardHolder>
-        <Card image='img/farmland.small.png'
-              title='Card 3'
-              {...defaultProps}
-        >
-            Body
-        </Card>
-    </CardHolder>,
-    <CardHolder>
-        <Card image='img/farmland.small.png'
-              title='Card 4'
-              {...defaultProps}
-        >
-            Body
-        </Card>
-    </CardHolder>,
+    <FarmCard data={farmData}/>,
+    <FarmCard data={farmData}/>,
+    <FarmCard data={farmData}/>,
+    <FarmCard data={farmData}/>,
 ]
 
 
