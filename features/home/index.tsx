@@ -11,8 +11,8 @@ export const Home = () => {
                     <FieldsCarousel/>
                 </div>
             </Hero>
-            <Avatar name='ohager'/>
-            <Avatar name='frank'/>
+            <Avatar name='ohager' badge="lord"/>
+            <Avatar name='frank' badge="patron"/>
             <Avatar name='jjos'/>
         </>
     )
