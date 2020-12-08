@@ -58,7 +58,7 @@ export const FieldsCarousel = () => {
         <Carousel
             items={carouselItems}
             responsive={responsive}
-            autoPlayInterval={5000}
+            autoPlayInterval={3000}
             disableDotsControls
             disableButtonsControls
             touchTracking={false}

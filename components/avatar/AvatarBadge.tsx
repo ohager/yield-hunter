@@ -9,7 +9,7 @@ export const AvatarBadge: React.FC<BadgeProps> = ({src, size}) => {
     return (
         <>
             <div className="badge">
-                <img src={src} alt="avatar-badge"/>
+                <img src={src} alt="avatar-badge" aria-describedby='avatar-badge'/>
             </div>
             <style jsx>{`
                 .badge {
