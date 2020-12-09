@@ -1,8 +1,8 @@
 import React from "react";
 import Image from "next/image"
-import {FarmDataSimple} from "../../types/FarmDataSimple";
+import {FarmLandData} from "../../types/FarmLandData";
 import {Card} from "../card";
-import {BurstValue} from "@burstjs/util";
+import {BurstValue, convertNumericIdToAddress} from "@burstjs/util";
 import {Avatar} from "../avatar";
 import {IconButton} from "../iconButton";
 
@@ -25,7 +25,7 @@ const MoneyItem = (props) => {
 
 
 interface Props {
-    data: FarmDataSimple
+    data: FarmLandData
 }
 
 export const FarmCard: React.FC<Props> = (props) => {
@@ -43,8 +43,8 @@ export const FarmCard: React.FC<Props> = (props) => {
             >
                 <div className="p-1 absolute left-0 top-0 w-full">
                     <div className="flex flex-row justify-between">
-                        <MoneyItem value={data.currentFarmValue}/>
-                        <Avatar name={data.patron} badge="patron" size={32}/>
+                        <MoneyItem value={data.farmValue}/>
+                        <Avatar name={convertNumericIdToAddress(data.patron)} badge="patron" size={32}/>
                     </div>
                 </div>
                 <div className="flex flex-col justify-between h-full">

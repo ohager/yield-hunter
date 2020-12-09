@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-// import rootReducer from './reducers'
+import {counterSlice} from "../features/home/slice";
+import {appSlice} from "./slice";
 
 export const store = configureStore({
     reducer: {
-
-    }
+        app: appSlice.reducer,
+    },
+    devTools: true,
 })
-
