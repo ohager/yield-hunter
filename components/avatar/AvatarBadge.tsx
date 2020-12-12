@@ -1,25 +1,25 @@
-import React from "react";
+import React from 'react'
 
 interface BadgeProps {
-    src: string,
-    size: number
+  src: string
+  size: number
 }
 
-export const AvatarBadge: React.FC<BadgeProps> = ({src, size}) => {
-    return (
-        <>
-            <div className="badge">
-                <img src={src} alt="avatar-badge" aria-describedby='avatar-badge'/>
-            </div>
-            <style jsx>{`
-                .badge {
-                    position: absolute;
-                    top: 0;
-                    right: 0;
-                    height: ${size / 4}px; 
-                    width: ${size / 4}px;
-                }
-             `}</style>
-        </>
-    )
+export const AvatarBadge: React.FC<BadgeProps> = ({ src, size }) => {
+  return (
+    <>
+      <div className="badge">
+        <img src={src} alt="avatar-badge" aria-describedby="avatar-badge" />
+      </div>
+      <style jsx>{`
+        .badge {
+          position: absolute;
+          top: 0;
+          right: 0;
+          height: ${size / 4}px;
+          width: ${size / 4}px;
+        }
+      `}</style>
+    </>
+  )
 }

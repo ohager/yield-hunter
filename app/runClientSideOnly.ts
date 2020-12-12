@@ -1,4 +1,5 @@
-import {isClientSide} from "./isClientSide";
-import {EffectCallback} from "react";
+import { isClientSide } from './isClientSide'
+import { EffectCallback } from 'react'
 
-export const runClientSideOnly = (fn: Function): EffectCallback => isClientSide ? fn() : () => {}
+export const runClientSideOnly = (fn: Function): EffectCallback =>
+  isClientSide ? fn() : () => {}
