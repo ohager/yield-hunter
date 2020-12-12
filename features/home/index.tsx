@@ -6,21 +6,20 @@ import { InfoBox } from './infoBox'
 import useSWR from 'swr'
 import { AppContext } from '../../app/appContext'
 import { FarmLandData } from '../../types/FarmLandData'
+import { FarmLandHistory } from '../../types/FarmLandHistory'
+import { useFarmlands } from './hooks/useFarmLands'
+import { useFarmlandHistories } from './hooks/useFarmLandHistories'
 
 export const Home = () => {
   const { FarmerService } = useContext(AppContext)
-  const { data } = useSWR<FarmLandData[]>(
-    'fetchFarms',
-    async () => await FarmerService.fetchAllFarmLands(),
-    {
-      refreshInterval: 10 * 1000,
-    }
-  )
+  const { farmLands } = useFarmlands()
+  const { farmLandHistories } = useFarmlandHistories()
+
   return (
     <>
       <Hero bg="img/farmland.small.png">
         <div className="relative flex items-center h-full">
-          {data && <FieldsCarousel farmLands={data} />}
+          {farmLands && <FieldsCarousel farmLands={farmLands} />}
           <InfoBox>
             Best Farmers
             <Avatar name="ohager" badge="lord" />
@@ -29,7 +28,7 @@ export const Home = () => {
           </InfoBox>
         </div>
       </Hero>
-      <p>{JSON.stringify(data, null, '\t')}</p>
+      <p>{JSON.stringify(farmLands, null, '\t')}</p>
     </>
   )
 }

@@ -2,6 +2,7 @@ import { BurstValue } from '@burstjs/util'
 import { Contract, ContractDataView } from '@burstjs/contracts'
 
 export class FarmLandData {
+  public readonly farmLandId: string
   public readonly currentFarmer: string
   public readonly farmValue: BurstValue
   public readonly farmers: string[]
@@ -72,13 +73,21 @@ export class FarmLandData {
     )
     const margin =
       Number.parseInt(view.getVariableAsDecimal(Addresses.Margin)) - 100
-    const currentFarmer = view.getVariableAsDecimal(Addresses.CurrentFarmer)
-    const winnerFarmer = view.getVariableAsDecimal(Addresses.WinnerFarmer)
+    const currentFarmerIndex = Number.parseInt(
+      view.getVariableAsDecimal(Addresses.CurrentFarmer)
+    )
+    const winnerFarmerIndex = Number.parseInt(
+      view.getVariableAsDecimal(Addresses.WinnerFarmer)
+    )
     const winnerFarmerBalance = BurstValue.fromPlanck(
       view.getVariableAsDecimal(Addresses.WinnerFarmer)
     )
 
+    const currentFarmer = farmers[currentFarmerIndex - 1]
+    const winnerFarmer = farmers[winnerFarmerIndex - 1]
+
     return {
+      farmLandId: contract.at,
       currentFarmer,
       winnerFarmer,
       winnerFarmerBalance,

@@ -12,7 +12,7 @@ interface Props {
 export const IconButton: React.FC<Props> = (props) => {
   const { tooltip, iconSrc, size } = props
   return (
-    <div onClick={props.onClick}>
+    <div className="drop-shadow cursor-pointer" onClick={props.onClick}>
       <Popup
         trigger={() => (
           <img src={iconSrc} width={size} height={size} alt={tooltip} />
@@ -21,6 +21,16 @@ export const IconButton: React.FC<Props> = (props) => {
       >
         {tooltip}
       </Popup>
+      <style jsx>{`
+        .drop-shadow {
+          filter: drop-shadow(0px 0px 3px darkgray);
+          transition: filter 250ms ease-in-out;
+        }
+
+        .drop-shadow:hover {
+          filter: drop-shadow(0px 0px 3px darkgray) brightness(1.1);
+        }
+      `}</style>
     </div>
   )
 }

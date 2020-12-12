@@ -1,5 +1,6 @@
 import { Api } from '@burstjs/core'
 import { FarmLandData } from '../types/FarmLandData'
+import { FarmLandHistory } from '../types/FarmLandHistory'
 
 const LordMethodHashes = {
   stake: '-2656511522688860312',
@@ -20,8 +21,25 @@ export class FarmerService {
     return FarmLandData.fromContract(contract)
   }
 
+  async fetchFarmLandHistory(contractId: string): Promise<FarmLandHistory> {
+    let { transactions } = await this.burstApi.account.getAccountTransactions({
+      accountId: contractId,
+      includeIndirect: false,
+    })
+
+    return new FarmLandHistory({
+      farmLandId: contractId,
+      transactions,
+    })
+  }
+
   async fetchAllFarmLands(): Promise<FarmLandData[]> {
     const promises = this.contractIds.map((id) => this.fetchFarmLand(id))
+    return await Promise.all(promises)
+  }
+
+  async fetchAllFarmLandHistories() {
+    const promises = this.contractIds.map((id) => this.fetchFarmLandHistory(id))
     return await Promise.all(promises)
   }
 }

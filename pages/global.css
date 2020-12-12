@@ -29,3 +29,8 @@ img {
   max-width: 100%;
   display: block;
 }
+
+.popup-content {
+  font-size: 0.75rem;
+  text-align: center;
+}

@@ -50,7 +50,16 @@ export const FarmCard: React.FC<Props> = (props) => {
           <div className="h-full">Some more info here</div>
           <div className="h-full">Some more info here</div>
           <div className="h-full">Some more info here</div>
-          <div className="h-full flex flex-row justify-end">
+          <div className="h-full flex flex-row justify-end items-center w-full">
+            <IconButton
+              iconSrc="/icon/greenhouse.svg"
+              tooltip="See Farmland Details"
+              size={32}
+              onClick={() => {
+                console.log('clicked')
+              }}
+            />
+            <div className="w-2" />
             <IconButton
               iconSrc="/icon/sow.svg"
               tooltip="Go Farming"
