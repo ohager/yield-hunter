@@ -23,7 +23,9 @@ const PaymentComponent: React.FC<PaymentProps> = ({ method }) => {
   }
 }
 
-interface Props extends ModalProps {}
+interface Props {
+  onClose: () => void
+}
 
 export const PaymentModal: React.FC<Props> = ({ onClose }) => {
   const [selected, setSelected] = useState(PaymentMethod.QrCode)
