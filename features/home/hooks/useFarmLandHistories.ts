@@ -15,7 +15,7 @@ export function useFarmlandHistories(): UseFarmLandHistories {
     'fetchFarmLandsHistories',
     async () => await FarmerService.fetchAllFarmLandHistories(),
     {
-      refreshInterval: 10 * 1000,
+      refreshInterval: 30 * 1000,
     }
   )
 

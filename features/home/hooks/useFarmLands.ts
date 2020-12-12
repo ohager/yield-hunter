@@ -14,7 +14,7 @@ export function useFarmlands(): UseFarmLands {
     'fetchFarmLands',
     async () => await FarmerService.fetchAllFarmLands(),
     {
-      refreshInterval: 10 * 1000,
+      refreshInterval: 30 * 1000,
     }
   )
 

@@ -5,6 +5,8 @@ import { Card } from '../card'
 import { BurstValue, convertNumericIdToAddress } from '@burstjs/util'
 import { Avatar } from '../avatar'
 import { IconButton } from '../iconButton'
+import Popup from 'reactjs-popup'
+import { PaymentModal } from '../paymentModal'
 
 const CardHolder = ({ children }) => (
   <div className="h-64 justify-center flex">{children}</div>
@@ -60,14 +62,21 @@ export const FarmCard: React.FC<Props> = (props) => {
               }}
             />
             <div className="w-2" />
-            <IconButton
-              iconSrc="/icon/sow.svg"
-              tooltip="Go Farming"
-              size={48}
-              onClick={() => {
-                console.log('clicked')
-              }}
-            />
+            <Popup
+              trigger={() => (
+                <IconButton
+                  iconSrc="/icon/sow.svg"
+                  tooltip="Go Farming"
+                  size={48}
+                  onClick={() => {
+                    console.log('clicked')
+                  }}
+                />
+              )}
+              modal
+            >
+              {(close) => <PaymentModal onClose={close} />}
+            </Popup>
           </div>
         </div>
       </Card>
