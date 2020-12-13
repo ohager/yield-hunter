@@ -4,15 +4,6 @@ import 'react-alice-carousel/lib/alice-carousel.css'
 import { FarmCard } from '../../components/farmCard'
 import { FarmLandData } from '../../types/FarmLandData'
 
-const CardHolder = ({ children }) => (
-  <div className="h-64 justify-center flex">{children}</div>
-)
-
-const defaultProps = {
-  height: '240px',
-  width: '240px',
-}
-
 interface Props {
   farmLands: FarmLandData[]
 }
@@ -35,8 +26,8 @@ export const FieldsCarousel: React.FC<Props> = ({ farmLands }) => {
       disableDotsControls
       disableButtonsControls
       touchTracking={false}
-      autoPlay
+      autoPlay={farmItems.length > 3}
       infinite
-    ></Carousel>
+    />
   )
 }
