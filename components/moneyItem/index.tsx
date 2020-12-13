@@ -10,7 +10,9 @@ export const MoneyItem: React.FC<Props> = (props) => {
   return (
     <div className="flex flex-row items-center">
       <img src="/icon/coin.svg" alt="coin" width={20} height={20} />
-      <span className="ml-1">{value && value.getBurst()}</span>
+      <span className="ml-1">
+        {value && Number.parseFloat(value.getBurst()).toFixed(2)}
+      </span>
     </div>
   )
 }

@@ -90,14 +90,19 @@ export const FarmCard: React.FC<Props> = (props) => {
                   iconSrc="/icon/sow.svg"
                   tooltip="Go Farming"
                   size={48}
-                  onClick={() => {
-                    console.log('clicked')
-                  }}
+                  onClick={() => {}}
                 />
               )}
               modal
             >
-              {(close) => <PaymentModal onClose={close} />}
+              {(close) => (
+                <PaymentModal
+                  value={data.farmValue}
+                  title="Go Farming"
+                  imageSrc="./img/farmland.small.png"
+                  onClose={close}
+                />
+              )}
             </Popup>
           </div>
         </div>

@@ -2,6 +2,9 @@ import React, { useContext, useState } from 'react'
 import { Modal, ModalProps } from '../modal'
 import { Input } from '../input'
 import { RadioButton } from '../radioButton'
+import { PassphrasePayment } from './PassphrasePayment'
+import { BurstValue } from '@burstjs/util'
+import { MoneyItem } from '../moneyItem'
 
 const PaymentMethod = {
   QrCode: 'qrcode',
@@ -16,7 +19,7 @@ interface PaymentProps {
 const PaymentComponent: React.FC<PaymentProps> = ({ method }) => {
   switch (method) {
     case PaymentMethod.Passphrase:
-      return <Input placeholder="Enter your passphrase..." label="Passphrase" />
+      return <PassphrasePayment />
     case PaymentMethod.DeepLink:
     case PaymentMethod.QrCode:
       return <h2>To Do</h2>
@@ -24,10 +27,14 @@ const PaymentComponent: React.FC<PaymentProps> = ({ method }) => {
 }
 
 interface Props {
+  value: BurstValue
+  title?: string
+  imageSrc?: string
   onClose: () => void
 }
 
-export const PaymentModal: React.FC<Props> = ({ onClose }) => {
+export const PaymentModal: React.FC<Props> = (props) => {
+  const { value, title = 'Make a payment', imageSrc = '', onClose } = props
   const [selected, setSelected] = useState(PaymentMethod.QrCode)
 
   function onSelectedPayment(e) {
@@ -35,7 +42,11 @@ export const PaymentModal: React.FC<Props> = ({ onClose }) => {
   }
 
   return (
-    <Modal title="Make a Payment" onClose={onClose}>
+    <Modal title={title} imageSrc={imageSrc} onClose={onClose}>
+      <div className="mb-2 flex flex-row">
+        <span className="pr-1">You are about to pay</span>
+        <MoneyItem value={value} />
+      </div>
       <fieldset>
         <div>
           <p className="text-sm">Choose your payment method</p>

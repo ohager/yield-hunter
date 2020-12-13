@@ -12,6 +12,7 @@
     "@burstjs/core": "^0.6.0-alpha.7",
     "@sindresorhus/string-hash": "^1.2.0",
     "classnames": "^2.2.6",
+    "lodash.debounce": "^4.0.8",
     "next": "^10.0.3",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-preset-env": "^6.7.0",
