@@ -1,6 +1,8 @@
 import { Api } from '@burstjs/core'
 import { FarmLandData } from '../types/FarmLandData'
 import { FarmLandHistory } from '../types/FarmLandHistory'
+import { BurstValue } from '@burstjs/util'
+import { generateMasterKeys } from '@burstjs/crypto'
 
 const LordMethodHashes = {
   stake: '-2656511522688860312',
@@ -41,5 +43,17 @@ export class FarmerService {
   async fetchAllFarmLandHistories() {
     const promises = this.contractIds.map((id) => this.fetchFarmLandHistory(id))
     return await Promise.all(promises)
+  }
+
+  async payFarming(passphrase: string, contractId: string, value: BurstValue) {
+    const { signPrivateKey, publicKey } = generateMasterKeys(passphrase)
+    const { standard } = await this.burstApi.network.getSuggestedFees()
+    await this.burstApi.transaction.sendAmountToSingleRecipient({
+      senderPrivateKey: signPrivateKey,
+      senderPublicKey: publicKey,
+      feePlanck: standard.toString(10),
+      amountPlanck: value.getPlanck(),
+      recipientId: contractId,
+    })
   }
 }

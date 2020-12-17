@@ -98,6 +98,7 @@ export const FarmCard: React.FC<Props> = (props) => {
               {(close) => (
                 <PaymentModal
                   value={data.farmValue}
+                  recipientId={data.farmLandId}
                   title="Go Farming"
                   imageSrc="./img/farmland.small.png"
                   onClose={close}

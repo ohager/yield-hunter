@@ -24,7 +24,17 @@ const deferredGetAccountBalance = debounce(getAccountBalance, 500, {
   trailing: false,
 })
 
-export const PassphraseInput: React.FC = () => {
+interface Props {
+  onPassphraseChange: ({
+    passphrase,
+    isValid,
+  }: {
+    passphrase: string
+    isValid: boolean
+  }) => void
+}
+
+export const PassphraseInput: React.FC<Props> = (props) => {
   const { BurstApi } = useContext(AppContext)
   const [accountBalance, setAccountBalance] = useState(null)
   const [passphrase, setPassphrase] = useState(null)
@@ -33,14 +43,14 @@ export const PassphraseInput: React.FC = () => {
   useEffect(() => {
     async function fetchBalance() {
       try {
-        console.log(passphrase)
         const { publicKey } = generateMasterKeys(passphrase)
         const accountId = getAccountIdFromPublicKey(publicKey)
         const result = await deferredGetAccountBalance(BurstApi, accountId)
         setAccountBalance(result)
+        props.onPassphraseChange({ passphrase, isValid: true })
       } catch (e) {
-        console.log('error', e)
         setAccountBalance(null)
+        props.onPassphraseChange({ passphrase, isValid: false })
       }
     }
 
@@ -69,14 +79,16 @@ export const PassphraseInput: React.FC = () => {
       >
         {isPassphraseVisible ? '🙉' : '🙈'}
       </div>
-      <div>
+      <div className="ml-0.5 text-xs">
         {accountBalance ? (
           <div className="flex flex-row justify-between items-center">
             <small>{accountBalance.account}</small>
             <MoneyItem value={accountBalance.balance} />
           </div>
         ) : (
-          <small>Invalid Passphrase</small>
+          <small className="text-red-400">
+            {passphrase ? 'Invalid Passphrase' : 'Passphrase required'}
+          </small>
         )}
       </div>
       <style jsx>{`

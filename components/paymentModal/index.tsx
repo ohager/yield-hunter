@@ -14,12 +14,18 @@ const PaymentMethod = {
 
 interface PaymentProps {
   method: string
+  recipientId: string
+  value: BurstValue
 }
 
-const PaymentComponent: React.FC<PaymentProps> = ({ method }) => {
+const PaymentComponent: React.FC<PaymentProps> = ({
+  method,
+  recipientId,
+  value,
+}) => {
   switch (method) {
     case PaymentMethod.Passphrase:
-      return <PassphrasePayment />
+      return <PassphrasePayment value={value} recipientId={recipientId} />
     case PaymentMethod.DeepLink:
     case PaymentMethod.QrCode:
       return <h2>To Do</h2>
@@ -28,6 +34,7 @@ const PaymentComponent: React.FC<PaymentProps> = ({ method }) => {
 
 interface Props {
   value: BurstValue
+  recipientId: string
   title?: string
   imageSrc?: string
   onClose: () => void
@@ -75,7 +82,7 @@ export const PaymentModal: React.FC<Props> = (props) => {
           </RadioButton>
         </div>
         <div className="mt-4">
-          <PaymentComponent method={selected} />
+          <PaymentComponent method={selected} {...props} />
         </div>
       </fieldset>
     </Modal>
