@@ -1,7 +1,6 @@
 import { useContext } from 'react'
-import { AppContext } from '../../../app/appContext'
 import useSWR from 'swr'
-import { FarmLandData } from '../../../types/FarmLandData'
+import { AppContext } from '../../../app/appContext'
 import { FarmLandHistory } from '../../../types/FarmLandHistory'
 import { UseSWRBase } from '../../../types/UseSWRBase'
 

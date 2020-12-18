@@ -9,7 +9,7 @@ interface Props {
 export const Input: React.FC<Props & React.InputHTMLAttributes<any>> = (
   props
 ) => {
-  const { label = '', startAdornment, redact, ...inputProps } = props
+  const { label = '', startAdornment, ...inputProps } = props
 
   const h = hash(`${label}.${Date.now()}`)
   const id = `${label}-${h}`

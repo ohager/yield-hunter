@@ -4,18 +4,14 @@ import { generateMasterKeys, Keys } from '@burstjs/crypto'
 import { IconButton } from '../iconButton'
 import { AppContext } from '../../app/appContext'
 import { BurstValue } from '@burstjs/util'
+import { PaymentComponentProps } from './paymentComponentProps'
 
-interface Props {
-  recipientId: string
-  value: BurstValue
-}
-
-export const PassphrasePayment: React.FC<Props> = (props) => {
+export const PassphrasePayment: React.FC<PaymentComponentProps> = (props) => {
   const { BurstApi } = useContext(AppContext)
   const [keys, setKeys] = useState<Keys>(null)
   const [isPending, setPending] = useState(false)
 
-  const { value, recipientId } = props
+  const { value, recipientId, onFinish } = props
 
   const isDisabled = !keys
 
@@ -24,14 +20,16 @@ export const PassphrasePayment: React.FC<Props> = (props) => {
     try {
       setPending(true)
       const { standard } = await BurstApi.network.getSuggestedFees()
-      // await BurstApi.transaction.sendAmountToSingleRecipient({
-      //   senderPrivateKey: keys.signPrivateKey,
-      //   senderPublicKey: keys.publicKey,
-      //   feePlanck: standard.toString(10),
-      //   amountPlanck: value.getPlanck(),
-      //   recipientId
-      // })
+      await BurstApi.transaction.sendAmountToSingleRecipient({
+        senderPrivateKey: keys.signPrivateKey,
+        senderPublicKey: keys.publicKey,
+        feePlanck: standard.toString(10),
+        amountPlanck: value.getPlanck(),
+        recipientId,
+      })
+      onFinish(true)
     } catch (e) {
+      onFinish(false)
       console.error(e)
       // TODO: messaging
     } finally {

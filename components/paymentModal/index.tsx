@@ -1,10 +1,11 @@
-import React, { useContext, useState } from 'react'
-import { Modal, ModalProps } from '../modal'
-import { Input } from '../input'
+import React, { useState } from 'react'
+import { Modal } from '../modal'
 import { RadioButton } from '../radioButton'
 import { PassphrasePayment } from './PassphrasePayment'
 import { BurstValue } from '@burstjs/util'
 import { MoneyItem } from '../moneyItem'
+import { DeeplinkPayment } from './DeeplinkPayment'
+import { QrCodePayment } from './QrCodePayment'
 
 const PaymentMethod = {
   QrCode: 'qrcode',
@@ -16,19 +17,18 @@ interface PaymentProps {
   method: string
   recipientId: string
   value: BurstValue
+  onFinish: (success: boolean) => void
 }
 
-const PaymentComponent: React.FC<PaymentProps> = ({
-  method,
-  recipientId,
-  value,
-}) => {
+const PaymentComponent: React.FC<PaymentProps> = (props) => {
+  const { method, ...rest } = props
   switch (method) {
     case PaymentMethod.Passphrase:
-      return <PassphrasePayment value={value} recipientId={recipientId} />
+      return <PassphrasePayment {...rest} />
     case PaymentMethod.DeepLink:
+      return <DeeplinkPayment {...rest} />
     case PaymentMethod.QrCode:
-      return <h2>To Do</h2>
+      return <QrCodePayment {...rest} />
   }
 }
 
@@ -48,6 +48,12 @@ export const PaymentModal: React.FC<Props> = (props) => {
     setSelected(e.target.value)
   }
 
+  function onPaymentFinished(success) {
+    if (success) {
+      onClose()
+    }
+  }
+
   return (
     <Modal title={title} imageSrc={imageSrc} onClose={onClose}>
       <div className="mb-2 flex flex-row">
@@ -64,14 +70,20 @@ export const PaymentModal: React.FC<Props> = (props) => {
             checked={selected === PaymentMethod.QrCode}
             onChange={onSelectedPayment}
           >
-            Scan QR-Code with Phoenix Mobile Wallet
+            Scan QR-Code with{' '}
+            <a href="http://phoenix-wallet.rocks/" target="_blank">
+              Phoenix Mobile Wallet
+            </a>
           </RadioButton>
           <RadioButton
             value={PaymentMethod.DeepLink}
             checked={selected === PaymentMethod.DeepLink}
             onChange={onSelectedPayment}
           >
-            Pay via Link with Phoenix Desktop Wallet
+            Pay via Link with{' '}
+            <a href="http://phoenix-wallet.rocks/" target="_blank">
+              Phoenix Desktop Wallet
+            </a>
           </RadioButton>
           <RadioButton
             value={PaymentMethod.Passphrase}
@@ -82,7 +94,11 @@ export const PaymentModal: React.FC<Props> = (props) => {
           </RadioButton>
         </div>
         <div className="mt-4">
-          <PaymentComponent method={selected} {...props} />
+          <PaymentComponent
+            method={selected}
+            onFinish={onPaymentFinished}
+            {...props}
+          />
         </div>
       </fieldset>
     </Modal>
