@@ -29,7 +29,7 @@ export const Avatar: React.FC<Props> = (props) => {
         trigger={(open) => (
           <img
             className="rounded-full flex items-center justify-center"
-            src={`https://robohash.org/set_set5/bgset_bg1/${name}`}
+            src={`https://robohash.org/set_set5/bgset_bg1/${name}?size=128x128`}
             alt={`avatar-${name}`}
           />
         )}
