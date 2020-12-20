@@ -3,13 +3,15 @@ import { PassphraseInput } from '../passphraseInput'
 import { generateMasterKeys, Keys } from '@burstjs/crypto'
 import { IconButton } from '../iconButton'
 import { AppContext } from '../../app/appContext'
-import { BurstValue } from '@burstjs/util'
 import { PaymentComponentProps } from './paymentComponentProps'
+import { useSetRecoilState } from 'recoil'
+import { notificationState } from '../notification/state'
 
 export const PassphrasePayment: React.FC<PaymentComponentProps> = (props) => {
   const { BurstApi } = useContext(AppContext)
   const [keys, setKeys] = useState<Keys>(null)
   const [isPending, setPending] = useState(false)
+  const setNotification = useSetRecoilState(notificationState)
 
   const { value, recipientId, onFinish } = props
 
@@ -28,10 +30,17 @@ export const PassphrasePayment: React.FC<PaymentComponentProps> = (props) => {
         recipientId,
       })
       onFinish(true)
+      setNotification({
+        type: 'success',
+        message: 'Payment successfully executed',
+      })
     } catch (e) {
       onFinish(false)
       console.error(e)
-      // TODO: messaging
+      setNotification({
+        type: 'error',
+        message: `Oh wack! Payment failed: ${e.message}`,
+      })
     } finally {
       setPending(false)
     }

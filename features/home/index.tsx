@@ -9,11 +9,19 @@ import { FarmLandData } from '../../types/FarmLandData'
 import { FarmLandHistory } from '../../types/FarmLandHistory'
 import { useFarmlands } from './hooks/useFarmLands'
 import { useFarmlandHistories } from './hooks/useFarmLandHistories'
+import { useSetRecoilState } from 'recoil'
+import { notificationState } from '../../components/notification/state'
 
 export const Home = () => {
   const { FarmerService } = useContext(AppContext)
   const { farmLands } = useFarmlands()
   const { farmLandHistories } = useFarmlandHistories()
+  const setNotification = useSetRecoilState(notificationState)
+
+  setNotification({
+    message: 'Hello',
+    type: 'success',
+  })
 
   return (
     <>

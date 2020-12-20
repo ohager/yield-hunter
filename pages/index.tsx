@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Layout from '../components/layout'
 import { Home } from '../features/home'
+import { Notification } from '../components/notification'
 
 export default function HomePage() {
   return (
