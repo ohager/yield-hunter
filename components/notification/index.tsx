@@ -3,6 +3,16 @@ import c from 'classnames'
 import { useRecoilState } from 'recoil'
 import { notificationState } from './state'
 
+function getIconSrc(type: string) {
+  switch (type) {
+    case 'success':
+      return './icon/sunflower.svg'
+    case 'error':
+    default:
+      return './icon/scarecrow.svg'
+  }
+}
+
 export const Notification: React.FC = () => {
   const [notification, setNotification] = useRecoilState(notificationState)
   const [isVisible, setVisible] = useState(false)
@@ -15,15 +25,14 @@ export const Notification: React.FC = () => {
   useEffect(() => {
     let timeout = null
     if (isVisible) {
-      setTimeout(close, 5000)
+      // setTimeout(close, 5000)
     }
     return () => {
-      clearTimeout(timeout)
+      // clearTimeout(timeout)
     }
   }, [isVisible])
 
   function close() {
-    setVisible(false)
     setNotification({
       message: '',
       type: 'none',
@@ -31,15 +40,44 @@ export const Notification: React.FC = () => {
   }
 
   return (
-    <div
-      className={c([
-        'relative flex flex-row justify-between',
-        { hidden: !isVisible },
-      ])}
-    >
-      <span className="ml-1"> {message}</span>
-      <div className="p-0.5 pr-1.5 cursor-pointer font-sans" onClick={close}>
-        &#x2715;
+    <div className="flex justify-center">
+      <div
+        className={c([
+          'flex flex-row justify-between rounded-sm shadow items-center p-1 shadow',
+          'notification animation-fadeIn',
+          { visible: isVisible },
+          { success: type === 'success' },
+          { error: type === 'error' },
+        ])}
+      >
+        <img
+          src={getIconSrc(type)}
+          width={48}
+          height={48}
+          alt="notification-icon"
+        />
+        <span className="ml-4 mr-4"> {message}</span>
+        <div className="p-0.5 pr-1.5 cursor-pointer font-sans" onClick={close}>
+          &#x2715;
+        </div>
+        <style jsx>{`
+          .notification {
+            display: none;
+            color: lightgray;
+          }
+
+          .notification.visible {
+            display: flex;
+          }
+
+          .notification.error {
+            background: rgba(224, 73, 85, 0.8);
+          }
+
+          .notification.success {
+            background: rgba(72, 145, 96, 0.8);
+          }
+        `}</style>
       </div>
     </div>
   )

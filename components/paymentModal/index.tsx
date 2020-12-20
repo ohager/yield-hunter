@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { Modal } from '../modal'
 import { RadioButton } from '../radioButton'
-import { PassphrasePayment } from './PassphrasePayment'
+import { PassphrasePayment } from './passphrasePayment'
 import { BurstValue } from '@burstjs/util'
 import { MoneyItem } from '../moneyItem'
-import { DeeplinkPayment } from './DeeplinkPayment'
-import { QrCodePayment } from './QrCodePayment'
+import { DeeplinkPayment } from './deeplinkPayment'
+import { QrCodePayment } from './qrCodePayment'
 
 const PaymentMethod = {
   QrCode: 'qrcode',

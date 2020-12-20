@@ -1,27 +1,12 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Hero } from '../../components/hero'
 import { FieldsCarousel } from './fieldsCarousel'
 import { Avatar } from '../../components/avatar'
 import { InfoBox } from './infoBox'
-import useSWR from 'swr'
-import { AppContext } from '../../app/appContext'
-import { FarmLandData } from '../../types/FarmLandData'
-import { FarmLandHistory } from '../../types/FarmLandHistory'
 import { useFarmlands } from './hooks/useFarmLands'
-import { useFarmlandHistories } from './hooks/useFarmLandHistories'
-import { useSetRecoilState } from 'recoil'
-import { notificationState } from '../../components/notification/state'
 
 export const Home = () => {
-  const { FarmerService } = useContext(AppContext)
   const { farmLands } = useFarmlands()
-  const { farmLandHistories } = useFarmlandHistories()
-  const setNotification = useSetRecoilState(notificationState)
-
-  setNotification({
-    message: 'Hello',
-    type: 'success',
-  })
 
   return (
     <>
