@@ -5,7 +5,6 @@ import { Avatar } from '../../components/avatar'
 import { InfoBox } from './infoBox'
 import { useFarmlands } from './hooks/useFarmLands'
 import { useNotification } from '../../app/hooks/useNotification'
-import { TransitionedFarmCard } from '../../components/farmCard'
 
 export const Home = () => {
   const { farmLands } = useFarmlands()

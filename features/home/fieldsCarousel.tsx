@@ -26,7 +26,7 @@ export const FieldsCarousel: React.FC<Props> = ({ farmLands }) => {
       disableDotsControls
       disableButtonsControls
       touchTracking={false}
-      autoPlay={farmItems.length > 3}
+      autoPlay={farmItems.length > 2}
       infinite
     />
   )

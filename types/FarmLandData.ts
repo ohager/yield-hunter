@@ -1,15 +1,16 @@
 import { BurstValue } from '@burstjs/util'
 import { Contract, ContractDataView } from '@burstjs/contracts'
+import { copyBurstValue } from '../app/copyBurstValue'
 
 export class FarmLandData {
   public readonly farmLandId: string
+  public readonly farmingPower: BurstValue = BurstValue.fromBurst(0)
   public readonly currentFarmer: string
   public readonly farmValue: BurstValue = BurstValue.fromBurst(0)
   public readonly farmers: string[] = []
   public readonly lordInvestments: BurstValue[] = []
   public readonly lords: string[] = []
   public readonly lordTax: BurstValue = BurstValue.fromBurst(0)
-  public readonly margin: number
   public readonly patron: string
   public readonly patronLevel: BurstValue
   public readonly winnerFarmer: string
@@ -21,42 +22,46 @@ export class FarmLandData {
     })
   }
 
+  /**
+   *     // --- "variant values"
+
+   * @param contract
+   */
   public static fromContract(contract: Contract): FarmLandData {
     /**
-     long one  = 1;
-     Address Patron;
+     long farmingPower= 300 * ONE_BURST;
      long seed = INITIAL_SEED;
-     long PatronLevel;
+     long lordTax = 18 * ONE_BURST;
+     long lordTaxPct = lordTax * 90/100;
      Address farmer1,farmer2,farmer3;
-     long CurrentFarmer = one;
-     long WinnerFarmer = one;
-     long WinnerFarmerBalance = INITIAL_SEED;
-     long looserFarmer;
+     long currentFarmer = ONE;
+     long winnerFarmer = ONE;
+     long winnerFarmerBalance = INITIAL_SEED;
+     long looserFarmerBalance;
+     Address patron;
+     long patronBalance;
      Address lord1,lord2,lord3,lord4;
      long lord1Invest,lord2Invest,lord3Invest,lord4Invest;
      long numberlords;
-     long TaxPerLord;
-     long two = 2;
-     long three = 3;
-     long four = 4;
-     long marge =102;
-     long lordTax = LORD_TAX *90/100;
+     // --- "locals"
+     long taxPerLord;
      long hash;
+     boolean canStake;
      */
 
     const Addresses = {
-      Patron: 1,
-      FarmValue: 2,
-      PatronLevel: 3,
+      FarmingPower: 0,
+      FarmValue: 1,
       Farmers: [4, 5, 6],
       CurrentFarmer: 7,
       WinnerFarmer: 8,
       WinnerFarmerBalance: 9,
       LooserFarmer: 10,
-      Lords: [11, 12, 13, 14],
-      LordsInvestments: [15, 16, 17, 18],
-      TaxPerLord: 20,
-      Margin: 24,
+      Patron: 11,
+      PatronLevel: 12,
+      Lords: [13, 14, 15, 16],
+      LordsInvestments: [17, 18, 19, 20],
+      TaxPerLord: 22,
     }
 
     const view = new ContractDataView(contract)
@@ -66,6 +71,9 @@ export class FarmLandData {
     )
     const farmValue = BurstValue.fromPlanck(
       view.getVariableAsDecimal(Addresses.FarmValue)
+    )
+    const farmingPower = BurstValue.fromPlanck(
+      view.getVariableAsDecimal(Addresses.FarmingPower)
     )
     const farmers = Addresses.Farmers.map<string>(
       view.getVariableAsDecimal.bind(view)
@@ -78,8 +86,6 @@ export class FarmLandData {
     const lordInvestments = Addresses.LordsInvestments.map<BurstValue>(
       (address) => BurstValue.fromPlanck(view.getVariableAsDecimal(address))
     )
-    const margin =
-      Number.parseInt(view.getVariableAsDecimal(Addresses.Margin)) - 100
     const currentFarmerIndex = Number.parseInt(
       view.getVariableAsDecimal(Addresses.CurrentFarmer)
     )
@@ -98,12 +104,12 @@ export class FarmLandData {
 
     return new FarmLandData({
       farmLandId: contract.at,
+      farmingPower,
       currentFarmer,
       winnerFarmer,
       winnerFarmerBalance,
       farmValue,
       farmers,
-      margin,
       lordInvestments,
       lords,
       lordTax,
@@ -114,19 +120,13 @@ export class FarmLandData {
 
   public get highestPayout(): BurstValue {
     return this.patronLevel
-      ? this.copyBurstValue(this.patronLevel).subtract(
-          BurstValue.fromBurst(100)
-        )
+      ? copyBurstValue(this.patronLevel).subtract(BurstValue.fromBurst(100))
       : BurstValue.fromBurst(0)
   }
 
   public get lordMaxROIperDay(): BurstValue {
     return this.lordTax
-      ? this.copyBurstValue(this.lordTax).multiply(360)
+      ? copyBurstValue(this.lordTax).multiply(360)
       : BurstValue.fromBurst(0)
-  }
-
-  private copyBurstValue(burstValue: BurstValue): BurstValue {
-    return BurstValue.fromBurst(burstValue.getBurst())
   }
 }

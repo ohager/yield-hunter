@@ -31,6 +31,14 @@ export const Notification: React.FC = () => {
     setVisible(notification.type !== 'none')
   }, [notification])
 
+  useEffect(() => {
+    if (notification.type === 'success' && isVisible) {
+      setTimeout(() => {
+        setVisible(false)
+      }, 5000)
+    }
+  }, [isVisible])
+
   function close() {
     setNotification({
       message: '',

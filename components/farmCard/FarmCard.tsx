@@ -1,12 +1,13 @@
 import React from 'react'
 import { FarmLandData } from '../../types/FarmLandData'
 import { Card } from '../card'
-import { convertNumericIdToAddress } from '@burstjs/util'
+import { BurstValue, convertNumericIdToAddress } from '@burstjs/util'
 import { Avatar } from '../avatar'
 import { IconButton } from '../iconButton'
 import Popup from 'reactjs-popup'
 import { PaymentModal } from '../paymentModal'
 import { MoneyItem } from '../moneyItem'
+import { copyBurstValue } from '../../app/copyBurstValue'
 
 const CardHolder = ({ children }) => (
   <div className="relative h-64 justify-center flex">{children}</div>
@@ -37,11 +38,13 @@ export const FarmCard: React.FC<Props> = (props) => {
         <div className="p-1 absolute left-0 top-0 w-full">
           <div className="flex flex-row justify-between">
             <MoneyItem value={data.farmValue} />
-            <Avatar
-              name={convertNumericIdToAddress(data.patron)}
-              badge="patron"
-              size={32}
-            />
+            {data.patron !== '0' && (
+              <Avatar
+                name={convertNumericIdToAddress(data.patron)}
+                badge="patron"
+                size={32}
+              />
+            )}
           </div>
         </div>
         <div className="p-1 absolute left-0 top-1/3 w-full">
@@ -97,7 +100,9 @@ export const FarmCard: React.FC<Props> = (props) => {
             >
               {(close) => (
                 <PaymentModal
-                  value={data.farmValue}
+                  value={copyBurstValue(data.farmValue).add(
+                    BurstValue.fromBurst(0.5)
+                  )}
                   recipientId={data.farmLandId}
                   title="Go Farming"
                   imageSrc="./img/farmland.small.png"
