@@ -18,7 +18,10 @@ function getNotificationAttributes(
         bgCol: 'rgba(224, 73, 85, 0.8)',
       }
     default:
-      return null
+      return {
+        icon: '',
+        bgCol: 'transparent',
+      }
   }
 }
 
@@ -97,7 +100,7 @@ export const Notification: React.FC = () => {
 
             .notification {
               color: lightgray;
-              background: ${attrs?.bgCol};
+              background: ${attrs.bgCol};
             }
           `}</style>
         </div>
