@@ -1,7 +1,7 @@
 import React from 'react'
 import { FarmLandData } from '../../types/FarmLandData'
 import { Card } from '../card'
-import { BurstValue, convertNumericIdToAddress } from '@burstjs/util'
+import { convertNumericIdToAddress } from '@burstjs/util'
 import { Avatar } from '../avatar'
 import { IconButton } from '../iconButton'
 import Popup from 'reactjs-popup'
@@ -9,7 +9,7 @@ import { PaymentModal } from '../paymentModal'
 import { MoneyItem } from '../moneyItem'
 
 const CardHolder = ({ children }) => (
-  <div className="h-64 justify-center flex">{children}</div>
+  <div className="relative h-64 justify-center flex">{children}</div>
 )
 
 const InfoLine = ({ label, children }) => (
