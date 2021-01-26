@@ -5,9 +5,12 @@ import { BurstValue } from '@burstjs/util'
 import { PaymentComponentProps } from './paymentComponentProps'
 import { mountLegacyDeepLink } from '../../app/createLegacyDeeplink'
 import useSWR from 'swr'
+import { useNotification } from '../../app/hooks/useNotification'
 
 export const DeeplinkPayment: React.FC<PaymentComponentProps> = (props) => {
   const { BurstApi } = useContext(AppContext)
+  const notification = useNotification('success')
+  const errorNotification = useNotification('error')
   const { data, error } = useSWR(
     'burst/getSuggestedFees',
     BurstApi.network.getSuggestedFees
@@ -33,8 +36,13 @@ export const DeeplinkPayment: React.FC<PaymentComponentProps> = (props) => {
   }
 
   const onCopyPaymentLink = async () => {
-    await navigator.clipboard.writeText(getLink())
-    // copied
+    try {
+      await navigator.clipboard.writeText(getLink())
+      onFinish(true)
+      notification.show('Copied to clipboard')
+    } catch (e) {
+      errorNotification.show('Copying failed 😭')
+    }
   }
 
   return (
