@@ -4,20 +4,9 @@ import { FieldsCarousel } from './fieldsCarousel'
 import { Avatar } from '../../components/avatar'
 import { InfoBox } from './infoBox'
 import { useFarmlands } from './hooks/useFarmLands'
-import { useNotification } from '../../app/hooks/useNotification'
 
 export const Home = () => {
   const { farmLands } = useFarmlands()
-  const notification = useNotification('success')
-
-  useEffect(() => {
-    function show() {
-      notification.show('Nice message')
-    }
-
-    setTimeout(show, 1000)
-  }, [])
-
   return (
     <>
       <Hero bg="img/farmland.small.png">

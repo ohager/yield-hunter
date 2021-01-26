@@ -8,6 +8,7 @@ import Popup from 'reactjs-popup'
 import { PaymentModal } from '../paymentModal'
 import { MoneyItem } from '../moneyItem'
 import { copyBurstValue } from '../../app/copyBurstValue'
+import Link from 'next/link'
 
 const CardHolder = ({ children }) => (
   <div className="relative h-64 justify-center flex">{children}</div>
@@ -78,14 +79,16 @@ export const FarmCard: React.FC<Props> = (props) => {
               }}
             />
             <div className="w-2" />
-            <IconButton
-              iconSrc="/icon/greenhouse.svg"
-              tooltip="See Farmland Details"
-              size={32}
-              onClick={() => {
-                console.log('clicked')
-              }}
-            />
+            <Link href={`/farms/${data.farmLandId}`}>
+              <IconButton
+                iconSrc="/icon/greenhouse.svg"
+                tooltip="See Farmland Details"
+                size={32}
+                onClick={() => {
+                  console.log('clicked')
+                }}
+              />
+            </Link>
             <div className="w-2" />
             <Popup
               trigger={() => (
