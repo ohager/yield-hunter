@@ -9,7 +9,7 @@
     "format": "pretty-quick --staged"
   },
   "dependencies": {
-    "@burstjs/core": "^0.6.0-alpha.7",
+    "@burstjs/core": "^0.6.0-alpha.9",
     "@sindresorhus/string-hash": "^1.2.0",
     "@types/react-transition-group": "^4.4.0",
     "classnames": "^2.2.6",
@@ -25,7 +25,7 @@
     "reactjs-popup": "^2.0.4",
     "recoil": "^0.1.2",
     "swr": "^0.3.9",
-    "tailwindcss": "^2.0.1"
+    "tailwindcss": "^2.0.2"
   },
   "devDependencies": {
     "@types/node": "^14.14.10",
