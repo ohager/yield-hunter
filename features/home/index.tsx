@@ -14,8 +14,8 @@ export const Home = () => {
           {farmLands && <FieldsCarousel farmLands={farmLands} />}
         </div>
       </Hero>
-      <section className="flex flex-row w-full">
-        <div className="h-80 w-2/3 p-4 bg-gray-700 text-gray-50">
+      <section className="flex flex-col-reverse md:flex-row w-full">
+        <div className="h-80 md:flex md:flex-col md:w-2/3 p-4 bg-gray-700 text-gray-50 flex-grow">
           <h1 className="text-4xl">Yield Hunter</h1>
           <h2 className="text-2xl">The innovative lucky game</h2>
           <p>
@@ -28,13 +28,13 @@ export const Home = () => {
             culpa qui officia deserunt mollit anim id est laborum.
           </p>
         </div>
-        <div className="p-4 h-80 bg-gray-600 text-gray-100 w-1/3">
+        <div className="p-4 h-80 bg-gray-600 text-gray-100 flex-none w-full text-center md:w-1/3">
           <h1 className="text-2xl">Best Farmers</h1>
           <BestFarmersList />
         </div>
       </section>
-      <section className="flex flex-row w-full">
-        <div className="h-80 w-1/2 p-4 bg-green-600">
+      <section className="flex flex-col md:flex-row w-full">
+        <div className="h-80 w-full md:w-1/2 p-4 bg-green-600">
           <h1 className="text-4xl">Farmers</h1>
           <h2 className="text-2xl">Plant and win</h2>
           <p>
@@ -47,7 +47,7 @@ export const Home = () => {
             culpa qui officia deserunt mollit anim id est laborum.
           </p>
         </div>
-        <div className="h-80 w-1/2 p-4 bg-indigo-700">
+        <div className="h-80 w-full md:w-1/2 p-4 bg-indigo-700">
           <h1 className="text-4xl">Lords</h1>
           <h2 className="text-2xl">Stake, lend and win</h2>
           <p>

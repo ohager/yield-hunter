@@ -1,4 +1,4 @@
-import { FarmerService } from './farmerService'
+import { FarmerService } from './services/farmerService'
 import React from 'react'
 import { ApiSettings, composeApi } from '@burstjs/core'
 

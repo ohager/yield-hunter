@@ -19,6 +19,7 @@ const ListItem: React.FC<ListItemProps> = ({ name, value }) => (
   </div>
 )
 
+// TODO: get these
 export const BestFarmersList = () => {
   return (
     <>

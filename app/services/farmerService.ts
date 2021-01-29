@@ -1,6 +1,6 @@
 import { Api } from '@burstjs/core'
-import { FarmLandData } from '../types/FarmLandData'
-import { FarmLandHistory } from '../types/FarmLandHistory'
+import { FarmLandData } from '../../types/FarmLandData'
+import { FarmLandHistory } from '../../types/FarmLandHistory'
 import { BurstValue } from '@burstjs/util'
 import { generateMasterKeys } from '@burstjs/crypto'
 

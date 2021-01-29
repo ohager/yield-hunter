@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
-import { notificationState } from './state'
+import { notificationState } from '../../app/states/notificationState'
 import { CSSTransition } from 'react-transition-group'
 
 function getNotificationAttributes(

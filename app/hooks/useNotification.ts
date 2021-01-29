@@ -1,5 +1,5 @@
 import { useSetRecoilState } from 'recoil'
-import { notificationState } from '../../components/notification/state'
+import { notificationState } from '../states/notificationState'
 
 export function useNotification(type: 'success' | 'error') {
   const setNotificationState = useSetRecoilState(notificationState)
