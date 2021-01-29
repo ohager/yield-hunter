@@ -1,6 +1,6 @@
 import React from 'react'
-import { Hero } from '../../components/hero'
 import { useFarmland } from './hooks/useFarmLand'
+import { FarmHeader } from './header/farmHeader'
 
 interface Props {
   id: string
@@ -8,13 +8,11 @@ interface Props {
 
 export const Farm: React.FC<Props> = ({ id }) => {
   const { farmLand, isLoading } = useFarmland(id)
+
   return (
-    <>
-      <Hero bg="img/farmland.small.png">
-        <div className="relative flex items-center h-full">
-          <small>{JSON.stringify(farmLand, null, '\t')}</small>
-        </div>
-      </Hero>
-    </>
+    <section className="flex flex-col">
+      <FarmHeader data={farmLand} />
+      <h1>more data here</h1>
+    </section>
   )
 }

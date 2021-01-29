@@ -7,8 +7,8 @@ type BadgeType = 'patron' | 'lord'
 
 function getBadgeSource(badge: BadgeType) {
   const map = {
-    patron: 'icon/star.svg',
-    lord: 'icon/top-hat.svg',
+    patron: '/icon/star.svg',
+    lord: '/icon/top-hat.svg',
   }
   return map[badge]
 }

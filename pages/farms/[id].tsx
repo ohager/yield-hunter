@@ -6,7 +6,7 @@ import Layout from '../../components/layout'
 export default function FarmPage() {
   const router = useRouter()
   const { id } = router.query
-
+  if (!id) return null
   return (
     <Layout>
       <Head>
