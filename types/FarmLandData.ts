@@ -1,6 +1,5 @@
 import { BurstValue } from '@burstjs/util'
 import { Contract, ContractDataView } from '@burstjs/contracts'
-import { copyBurstValue } from '../app/copyBurstValue'
 
 export class FarmLandData {
   public readonly farmLandId: string
@@ -120,13 +119,13 @@ export class FarmLandData {
 
   public get highestPayout(): BurstValue {
     return this.patronLevel
-      ? copyBurstValue(this.patronLevel).subtract(BurstValue.fromBurst(100))
+      ? this.patronLevel.clone().subtract(BurstValue.fromBurst(100))
       : BurstValue.fromBurst(0)
   }
 
   public get lordMaxROIperDay(): BurstValue {
     return this.lordTax
-      ? copyBurstValue(this.lordTax).multiply(360)
+      ? this.lordTax.clone().multiply(360)
       : BurstValue.fromBurst(0)
   }
 }

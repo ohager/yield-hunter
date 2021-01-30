@@ -7,7 +7,6 @@ import { IconButton } from '../iconButton'
 import Popup from 'reactjs-popup'
 import { PaymentModal } from '../paymentModal'
 import { MoneyItem } from '../moneyItem'
-import { copyBurstValue } from '../../app/copyBurstValue'
 import Link from 'next/link'
 
 const CardHolder = ({ children }) => (
@@ -103,9 +102,7 @@ export const FarmCard: React.FC<Props> = (props) => {
             >
               {(close) => (
                 <PaymentModal
-                  value={copyBurstValue(data.farmValue).add(
-                    BurstValue.fromBurst(0.5)
-                  )}
+                  value={data.farmValue.clone().add(BurstValue.fromBurst(0.5))}
                   recipientId={data.farmLandId}
                   title="Go Farming"
                   imageSrc="./img/farmland.small.png"
