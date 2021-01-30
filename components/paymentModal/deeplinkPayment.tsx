@@ -51,7 +51,7 @@ export const DeeplinkPayment: React.FC<PaymentComponentProps> = (props) => {
         <div className="mt-1 mb-1 flex flex-row justify-center">
           <IconButton
             onClick={onOpenPaymentLink}
-            iconSrc="./icon/link.svg"
+            iconSrc="/icon/link.svg"
             tooltip="Open Payment Link"
             pending={!data && !error}
             size={64}
@@ -59,7 +59,7 @@ export const DeeplinkPayment: React.FC<PaymentComponentProps> = (props) => {
           <div className="ml-4" />
           <IconButton
             onClick={onCopyPaymentLink}
-            iconSrc="./icon/copy.svg"
+            iconSrc="/icon/copy.svg"
             tooltip="Copy Payment Link"
             pending={!data && !error}
             size={64}

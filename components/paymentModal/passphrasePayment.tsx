@@ -55,7 +55,7 @@ export const PassphrasePayment: React.FC<PaymentComponentProps> = (props) => {
         <div className="mt-1 mb-1 flex flex-row justify-center">
           <IconButton
             onClick={onButtonClick}
-            iconSrc="./icon/pay-per-click.svg"
+            iconSrc="/icon/pay-per-click.svg"
             tooltip="Confirm Payment"
             disable={isDisabled}
             pending={isPending}

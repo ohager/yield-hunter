@@ -9,12 +9,12 @@ function getNotificationAttributes(
   switch (type) {
     case 'success':
       return {
-        icon: './icon/sunflower.svg',
+        icon: '/icon/sunflower.svg',
         bgCol: 'rgba(72, 145, 96, 0.8)',
       }
     case 'error':
       return {
-        icon: './icon/scarecrow.svg',
+        icon: '/icon/scarecrow.svg',
         bgCol: 'rgba(224, 73, 85, 0.8)',
       }
     default:
